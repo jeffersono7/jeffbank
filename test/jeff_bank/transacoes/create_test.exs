@@ -2,7 +2,7 @@ defmodule JeffBank.Transacoes.CreateTest do
   use JeffBank.DataCase, async: true
   use JeffBank.TestUtils
 
-  alias Ecto.Changeset
+  alias Ecto.{Changeset, UUID}
   alias JeffBank.{Contas, Transacoes, Transacao}
   alias Transacoes.Create
 
@@ -72,6 +72,11 @@ defmodule JeffBank.Transacoes.CreateTest do
       Create.estornar_transacao(%{transacao_id: transacao.id})
 
       assert {:error, "Transação já foi estornada!"} = Create.estornar_transacao(%{transacao_id: transacao.id})
+    end
+
+    test "quando tentar estar transacao que não existe, deve retornar erro" do
+
+      assert {:error, "Transação não encontrada!"} = Create.estornar_transacao(%{transacao_id: UUID.generate()})
     end
   end
 end
