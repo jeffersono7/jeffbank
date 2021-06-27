@@ -9,6 +9,7 @@ defmodule JeffBankWeb.TransacoesView do
           valor: valor,
           enviante_id: enviante_id,
           recebedora_id: recebedora_id,
+          tipo: tipo,
           inserted_at: inserted_at,
           updated_at: updated_at
         }
@@ -18,6 +19,7 @@ defmodule JeffBankWeb.TransacoesView do
       valor: valor,
       enviante_id: enviante_id,
       recebedora_id: recebedora_id,
+      tipo: tipo,
       inserted_at: inserted_at,
       updated_at: updated_at
     }

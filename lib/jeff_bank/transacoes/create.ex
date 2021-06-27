@@ -11,7 +11,7 @@ defmodule JeffBank.Transacoes.Create do
     |> criar_transacao()
   end
 
-  def estornar_transacao(%{transacao_id: transacao_id}) do
+  def estornar_transacao(%{id: transacao_id}) do
     with {:ok, transacao} <- fetch_transacao(transacao_id),
          true <- transacao_pode_ser_estornada?(transacao_id) do
       %{
