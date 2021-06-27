@@ -51,5 +51,26 @@ defmodule JeffBank.TransacaoTest do
                valid?: false
              } = Transacao.changeset(params)
     end
+
+    test "quando campos obrigatorios nao forem preenchidos, deve retornar um changeset inválido" do
+      enviante_id = UUID.generate()
+      valor = Decimal.new("1.0")
+
+      params = %{
+        tipo: :transacao,
+        valor: valor,
+        enviante_id: enviante_id
+      }
+
+      assert %Changeset{
+               changes: %{
+                 enviante_id: ^enviante_id,
+                 tipo: :transacao,
+                 valor: ^valor
+               },
+               errors: [{:recebedora_id, {_, [validation: :required]}}],
+               valid?: false
+             } = Transacao.changeset(params)
+    end
   end
 end
