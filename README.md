@@ -1,5 +1,27 @@
 # JeffBank
 
+É um serviço financeiro, onde é possivel criar contas e realizar transações financeiras entre elas.
+
+## Começando
+
+### Desenvolvendo na maquina local
+  - Subir serviços de banco de dados postgres
+    ```shell
+    $ cd devops;
+    $ chmod +x start.sh
+    $ ./start.sh
+    $ cd ..
+    ```
+  - Deve instalar elixir e erlang na máquina (sugestão: usar asdf)
+  - Executar testes para garantir que tudo está funcionando e a integração com os serviços necessários estão atendidas
+    ```shell
+    $ mix test
+    ```
+  - Para subir a aplicação (http://localhost:4000)
+    ```shell
+    $ mix phx.server
+    ```
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
