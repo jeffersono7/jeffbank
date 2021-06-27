@@ -5,6 +5,7 @@ defmodule JeffBank.Conta do
 
   use Ecto.Schema
   import Ecto.Changeset
+  import Brcpfcnpj.Changeset
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -22,6 +23,7 @@ defmodule JeffBank.Conta do
     %__MODULE__{}
     |> cast(attrs, [:nome, :sobrenome, :cpf, :saldo])
     |> validate_required([:nome, :sobrenome, :cpf, :saldo])
+    |> validate_cpf(:cpf)
   end
 
   @spec deposito(%__MODULE__{}, Decimal.t()) :: Ecto.Changeset.t()

@@ -18,6 +18,18 @@ defmodule JeffBank.ContaTest do
              } = Conta.changeset(param)
     end
 
+    test "quando cpf é inválido, deve retornar um changeset inválido" do
+      saldo = Decimal.new("0.0")
+
+      param = %{nome: "Jefferson", sobrenome: "Farias", cpf: "22222222299", saldo: saldo}
+
+      assert %Changeset{
+               changes: %{cpf: "22222222299", nome: "Jefferson", sobrenome: "Farias", saldo: ^saldo},
+               errors: [{:cpf, {_, [validation: :cpf]}}],
+               valid?: false
+             } = Conta.changeset(param)
+    end
+
     test "quando parâmetros inválidos, deve retornar um changeset inválido" do
       param = %{nome: "Jefferson"}
 
@@ -69,8 +81,6 @@ defmodule JeffBank.ContaTest do
       conta = %Conta{nome: "Jefferson", sobrenome: "Farias", cpf: @cpf, saldo: saldo}
 
       valor_saque = Decimal.new("100.26")
-
-      saldo_expected = Decimal.sub(saldo, valor_saque)
 
       assert %Changeset{
                changes: %{},
