@@ -26,5 +26,6 @@ defmodule JeffBank.Transacao do
     |> validate_inclusion(:tipo, Ecto.Enum.values(__MODULE__, :tipo))
     |> foreign_key_constraint(:enviante_id)
     |> foreign_key_constraint(:recebedora_id)
+    |> validate_number(:valor, greater_than: 0)
   end
 end

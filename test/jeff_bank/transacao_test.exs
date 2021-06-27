@@ -27,5 +27,29 @@ defmodule JeffBank.TransacaoTest do
                valid?: true
              } = Transacao.changeset(params)
     end
+
+    test "quando valor é zero, deve retornar um changeset inválido" do
+      enviante_id = UUID.generate()
+      recebedora_id = UUID.generate()
+      valor = Decimal.new("0")
+
+      params = %{
+        tipo: :transacao,
+        valor: valor,
+        enviante_id: enviante_id,
+        recebedora_id: recebedora_id
+      }
+
+      assert %Changeset{
+               changes: %{
+                 enviante_id: ^enviante_id,
+                 recebedora_id: ^recebedora_id,
+                 tipo: :transacao,
+                 valor: ^valor
+               },
+               errors: [valor: {_, [validation: :number, kind: :greater_than, number: 0]}],
+               valid?: false
+             } = Transacao.changeset(params)
+    end
   end
 end
