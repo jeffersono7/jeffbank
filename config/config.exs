@@ -10,6 +10,11 @@ use Mix.Config
 config :jeff_bank,
   ecto_repos: [JeffBank.Repo]
 
+# Config generators
+config  :jeff_bank, :generators,
+  migration: true,
+  binary_id: true
+
 # Configures the endpoint
 config :jeff_bank, JeffBankWeb.Endpoint,
   url: [host: "localhost"],
