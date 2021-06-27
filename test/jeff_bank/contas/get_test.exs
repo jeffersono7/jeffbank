@@ -15,7 +15,9 @@ defmodule JeffBank.Contas.GetTest do
     end
 
     test "quando conta existir deve retornar conta" do
-      {:ok, conta} = %{nome: "Jefferson", sobrenome: "Farias", cpf: @cpf, saldo: Decimal.new("10.0")} |> Create.call()
+      {:ok, conta} =
+        %{nome: "Jefferson", sobrenome: "Farias", cpf: @cpf, saldo: Decimal.new("10.0")}
+        |> Create.call()
 
       assert {:ok, %Conta{}} = Get.call(conta.id)
     end

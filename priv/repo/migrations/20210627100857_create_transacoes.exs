@@ -11,10 +11,13 @@ defmodule JeffBank.Repo.Migrations.CreateTransacoes do
       add :recebedora_id, references(:contas, on_delete: :nothing, type: :binary_id),
         not_null: true
 
+      add :transacao_id, references(:transacoes, type: :binary_id)
+
       timestamps()
     end
 
     create index(:transacoes, [:enviante_id])
     create index(:transacoes, [:recebedora_id])
+    create unique_index(:transacoes, [:transacao_id])
   end
 end

@@ -14,6 +14,7 @@ defmodule JeffBank.Transacao do
 
     belongs_to :enviante, JeffBank.Conta
     belongs_to :recebedora, JeffBank.Conta
+    belongs_to :transacao, JeffBank.Transacao
 
     timestamps()
   end
@@ -21,11 +22,12 @@ defmodule JeffBank.Transacao do
   @doc false
   def changeset(attrs) do
     %__MODULE__{}
-    |> cast(attrs, [:valor, :tipo, :enviante_id, :recebedora_id])
+    |> cast(attrs, [:valor, :tipo, :enviante_id, :recebedora_id, :transacao_id])
     |> validate_required([:valor, :tipo, :enviante_id, :recebedora_id])
     |> validate_inclusion(:tipo, Ecto.Enum.values(__MODULE__, :tipo))
     |> foreign_key_constraint(:enviante_id)
     |> foreign_key_constraint(:recebedora_id)
+    |> foreign_key_constraint(:transacao_id)
     |> validate_number(:valor, greater_than: 0)
   end
 end
