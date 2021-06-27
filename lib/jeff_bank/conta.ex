@@ -14,9 +14,18 @@ defmodule JeffBank.Conta do
   end
 
   @doc false
-  def changeset(conta, attrs) do
-    conta
+  def changeset(attrs) do
+    %__MODULE__{}
     |> cast(attrs, [:nome, :sobrenome, :cpf, :saldo])
     |> validate_required([:nome, :sobrenome, :cpf, :saldo])
+  end
+
+  @spec deposito(%__MODULE__{}, Decimal.t()) :: Ecto.Changeset.t()
+  def deposito(%{saldo: saldo} = conta, valor) do
+    novo_saldo = %{saldo: Decimal.add(saldo, valor)}
+
+    conta
+    |> cast(novo_saldo, [:saldo])
+    |> validate_required([:saldo])
   end
 end
