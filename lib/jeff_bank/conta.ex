@@ -1,4 +1,8 @@
 defmodule JeffBank.Conta do
+  @moduledoc """
+  Módulo de Conta
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -27,5 +31,22 @@ defmodule JeffBank.Conta do
     conta
     |> cast(novo_saldo, [:saldo])
     |> validate_required([:saldo])
+  end
+
+  @spec deposito(%__MODULE__{}, Decimal.t()) :: Ecto.Changeset.t()
+  def saque(%{saldo: saldo} = conta, valor) do
+    novo_saldo = %{saldo: Decimal.sub(saldo, valor)}
+
+    case Decimal.negative?(novo_saldo.saldo) do
+      true ->
+        conta
+        |> cast(%{}, [])
+        |> add_error(:saldo, "Saldo insuficiente!", validation: :saldo_insuficiente)
+
+      false ->
+        conta
+        |> cast(novo_saldo, [:saldo])
+        |> validate_required([:saldo])
+    end
   end
 end

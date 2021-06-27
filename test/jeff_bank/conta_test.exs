@@ -48,4 +48,35 @@ defmodule JeffBank.ContaTest do
              } = Conta.deposito(conta, valor_deposito)
     end
   end
+
+  describe "saque/2" do
+    test "quando recebido uma conta com saldo suficiente e valor de saque dentro do limite, deve retornar um changeset válido com novo saldo" do
+      saldo = Decimal.new("100.25")
+      conta = %Conta{nome: "Jefferson", sobrenome: "Farias", cpf: @cpf, saldo: saldo}
+
+      valor_saque = Decimal.new("30.23")
+
+      saldo_expected = Decimal.sub(saldo, valor_saque)
+
+      assert %Changeset{
+               changes: %{saldo: ^saldo_expected},
+               valid?: true
+             } = Conta.saque(conta, valor_saque)
+    end
+
+    test "quando recebido uma conta e valor de saque maior que o saldo existente, deve retornar um changeset inválido sem alterações" do
+      saldo = Decimal.new("100.25")
+      conta = %Conta{nome: "Jefferson", sobrenome: "Farias", cpf: @cpf, saldo: saldo}
+
+      valor_saque = Decimal.new("100.26")
+
+      saldo_expected = Decimal.sub(saldo, valor_saque)
+
+      assert %Changeset{
+               changes: %{},
+               errors: [saldo: {_, [validation: :saldo_insuficiente]}],
+               valid?: false
+             } = Conta.saque(conta, valor_saque)
+    end
+  end
 end
