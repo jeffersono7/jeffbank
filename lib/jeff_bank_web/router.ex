@@ -7,6 +7,10 @@ defmodule JeffBankWeb.Router do
 
   scope "/api", JeffBankWeb do
     pipe_through :api
+
+    post "/contas", ContasController, :create
+
+    post "/transacoes", TransacoesController, :create
   end
 
   # Enables LiveDashboard only for development
