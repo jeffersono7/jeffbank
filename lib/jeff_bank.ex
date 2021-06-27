@@ -6,4 +6,10 @@ defmodule JeffBank do
   Contexts are also responsible for managing your data, regardless
   if it comes from the database, an external API or others.
   """
+
+  alias JeffBank.{Contas, Transacoes}
+
+  defdelegate criar_conta(params), to: Contas.Create, as: :call
+  defdelegate criar_transacao(params, tipo), to: Transacoes.Create, as: :call
+  defdelegate estornar_transacao(params), to: Transacoes.Create
 end

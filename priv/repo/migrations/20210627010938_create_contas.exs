@@ -11,5 +11,7 @@ defmodule JeffBank.Repo.Migrations.CreateContas do
 
       timestamps()
     end
+
+    create unique_index(:contas, [:cpf])
   end
 end

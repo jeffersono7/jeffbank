@@ -24,7 +24,12 @@ defmodule JeffBank.ContaTest do
       param = %{nome: "Jefferson", sobrenome: "Farias", cpf: "22222222299", saldo: saldo}
 
       assert %Changeset{
-               changes: %{cpf: "22222222299", nome: "Jefferson", sobrenome: "Farias", saldo: ^saldo},
+               changes: %{
+                 cpf: "22222222299",
+                 nome: "Jefferson",
+                 sobrenome: "Farias",
+                 saldo: ^saldo
+               },
                errors: [{:cpf, {_, [validation: :cpf]}}],
                valid?: false
              } = Conta.changeset(param)

@@ -24,6 +24,7 @@ defmodule JeffBank.Conta do
     |> cast(attrs, [:nome, :sobrenome, :cpf, :saldo])
     |> validate_required([:nome, :sobrenome, :cpf, :saldo])
     |> validate_cpf(:cpf)
+    |> unique_constraint(:cpf)
   end
 
   @spec deposito(%__MODULE__{}, Decimal.t()) :: Ecto.Changeset.t()
