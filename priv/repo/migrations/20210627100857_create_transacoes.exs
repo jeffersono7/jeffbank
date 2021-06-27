@@ -7,7 +7,9 @@ defmodule JeffBank.Repo.Migrations.CreateTransacoes do
       add :valor, :decimal, not_null: true
       add :tipo, :string, not_null: true, size: 20
       add :enviante_id, references(:contas, on_delete: :nothing, type: :binary_id), not_null: true
-      add :recebedora_id, references(:contas, on_delete: :nothing, type: :binary_id), not_null: true
+
+      add :recebedora_id, references(:contas, on_delete: :nothing, type: :binary_id),
+        not_null: true
 
       timestamps()
     end
