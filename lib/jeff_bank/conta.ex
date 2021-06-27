@@ -35,7 +35,7 @@ defmodule JeffBank.Conta do
     |> validate_required([:saldo])
   end
 
-  @spec deposito(%__MODULE__{}, Decimal.t()) :: Ecto.Changeset.t()
+  @spec saque(%__MODULE__{}, Decimal.t()) :: Ecto.Changeset.t()
   def saque(%{saldo: saldo} = conta, valor) do
     novo_saldo = %{saldo: Decimal.sub(saldo, valor)}
 
