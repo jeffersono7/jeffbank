@@ -2,6 +2,8 @@
 
 É um serviço financeiro, onde é possivel criar contas e realizar transações financeiras entre elas.
 
+[![Build Status](https://github.com/jeffersono7/jeffbank/actions/workflows/elixir.yml/badge.svg)](https://github.com/jeffersono7/jeffbank/actions/workflows/elixir.yml)
+
 ## Começando
 
 ### Desenvolvendo na maquina local
