@@ -88,4 +88,33 @@ defmodule JeffBankWeb.TransacoesControllerTest do
       assert %{"message" => "Transação não encontrada!"} = response
     end
   end
+
+  describe "pesquisar/2" do
+    test "", %{conn: conn} do
+      valor = Decimal.new("40.0")
+      enviante = criar_conta()
+      recebedora = criar_conta()
+
+      params = %{valor: valor, enviante_id: enviante.id, recebedora_id: recebedora.id}
+
+      conn
+      |> post(Routes.transacoes_path(conn, :create), params)
+      |> json_response(:created)
+
+      conn
+      |> post(Routes.transacoes_path(conn, :create), params)
+      |> json_response(:created)
+
+      response =
+        conn
+        |> get(
+          Routes.transacoes_path(conn, :pesquisar),
+          data_inicio: DateTime.utc_now(),
+          data_final: DateTime.utc_now()
+        )
+        |> json_response(:ok)
+
+        assert [_, _] = response
+    end
+  end
 end

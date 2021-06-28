@@ -24,4 +24,9 @@ defmodule JeffBankWeb.TransacoesView do
       updated_at: updated_at
     }
   end
+
+  def render("index.json", %{transacoes: transacoes}) do
+    transacoes
+    |> Enum.map(&render("create.json", transacao: &1))
+  end
 end

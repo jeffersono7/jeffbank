@@ -22,4 +22,12 @@ defmodule JeffBankWeb.TransacoesController do
       |> render("create.json", transacao: transacao)
     end
   end
+
+  def pesquisar(%Conn{} = conn, %{"data_inicio" => data_inicio, "data_final" => data_fim}) do
+    with transacoes <- JeffBank.pesquisar_transacoes(data_inicio, data_fim) do
+      conn
+      |> put_status(:ok)
+      |> render("index.json", transacoes: transacoes)
+    end
+  end
 end
