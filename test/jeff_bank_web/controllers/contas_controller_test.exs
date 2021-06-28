@@ -3,6 +3,8 @@ defmodule JeffBankWeb.ContasControllerTest do
 
   use JeffBank.TestUtils
 
+  alias Ecto.UUID
+
   describe "create/2" do
     setup %{conn: conn} do
       {:ok, conn: conn}
@@ -30,6 +32,33 @@ defmodule JeffBankWeb.ContasControllerTest do
         |> json_response(:bad_request)
 
       assert %{"message" => _} = response
+    end
+  end
+
+  describe "get_saldo/2" do
+    setup %{conn: conn} do
+      {:ok, conn: conn}
+    end
+
+    test "quando conta existir, deve retornar saldo", %{conn: conn} do
+      conta = criar_conta()
+      saldo_expected = Decimal.to_string(conta.saldo)
+
+      response =
+        conn
+        |> get(Routes.contas_path(conn, :get_saldo, conta.id))
+        |> json_response(:ok)
+
+      assert %{"saldo" => ^saldo_expected} = response
+    end
+
+    test "quando conta não existir, deve retornar error", %{conn: conn} do
+      response =
+        conn
+        |> get(Routes.contas_path(conn, :get_saldo, UUID.generate()))
+        |> json_response(:bad_request)
+
+      assert %{"message" => "Conta não encontrada!"} = response
     end
   end
 end

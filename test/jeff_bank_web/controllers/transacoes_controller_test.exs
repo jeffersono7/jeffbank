@@ -116,7 +116,7 @@ defmodule JeffBankWeb.TransacoesControllerTest do
         )
         |> json_response(:ok)
 
-        assert [_, _] = response
+      assert [_, _] = response
     end
   end
 end
