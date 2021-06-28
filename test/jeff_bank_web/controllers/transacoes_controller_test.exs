@@ -95,6 +95,8 @@ defmodule JeffBankWeb.TransacoesControllerTest do
       enviante = criar_conta()
       recebedora = criar_conta()
 
+      data_hora_antes = DateTime.utc_now()
+
       params = %{valor: valor, enviante_id: enviante.id, recebedora_id: recebedora.id}
 
       conn
@@ -109,7 +111,7 @@ defmodule JeffBankWeb.TransacoesControllerTest do
         conn
         |> get(
           Routes.transacoes_path(conn, :pesquisar),
-          data_inicio: DateTime.utc_now(),
+          data_inicio: data_hora_antes,
           data_final: DateTime.utc_now()
         )
         |> json_response(:ok)
