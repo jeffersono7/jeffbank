@@ -10,7 +10,9 @@ defmodule JeffBankWeb.Router do
 
     post "/contas", ContasController, :create
 
+    get "/transacoes", TransacoesController, :pesquisar
     post "/transacoes", TransacoesController, :create
+    post "/transacoes/:id/estorno", TransacoesController, :estornar
   end
 
   # Enables LiveDashboard only for development

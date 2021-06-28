@@ -11,7 +11,7 @@ defmodule JeffBank.Transacoes.Create do
     |> criar_transacao()
   end
 
-  def estornar_transacao(%{transacao_id: transacao_id}) do
+  def estornar_transacao(%{id: transacao_id}) do
     with {:ok, transacao} <- fetch_transacao(transacao_id),
          true <- transacao_pode_ser_estornada?(transacao_id) do
       %{
@@ -28,13 +28,15 @@ defmodule JeffBank.Transacoes.Create do
     end
   end
 
-  defp criar_transacao(params) do
+  defp criar_transacao(%{enviante_id: _, recebedora_id: _, tipo: _, valor: _} = params) do
     {:ok, enviante} = Get.call(params.enviante_id)
     {:ok, recebedora} = Get.call(params.recebedora_id)
     valor = Map.get(params, :valor)
 
     criar_transacao_transferencia(params, enviante, recebedora, valor)
   end
+
+  defp criar_transacao(_params), do: {:error, "Campos obrigatórios não preenchidos!"}
 
   defp criar_transacao_transferencia(params, enviante, recebedora, valor) do
     multi =

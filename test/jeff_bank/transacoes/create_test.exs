@@ -51,7 +51,7 @@ defmodule JeffBank.Transacoes.CreateTest do
       assert {:ok, %Transacao{id: _, valor: ^valor} = transacao} = Create.call(params, :transacao)
 
       assert {:ok, %Transacao{id: _, valor: ^valor}} =
-               Create.estornar_transacao(%{transacao_id: transacao.id})
+               Create.estornar_transacao(%{id: transacao.id})
 
       {:ok, enviante_apos} = Contas.Get.call(enviante.id)
       {:ok, recebedora_apos} = Contas.Get.call(recebedora.id)
@@ -69,14 +69,15 @@ defmodule JeffBank.Transacoes.CreateTest do
 
       assert {:ok, %Transacao{id: _, valor: ^valor} = transacao} = Create.call(params, :transacao)
 
-      Create.estornar_transacao(%{transacao_id: transacao.id})
+      Create.estornar_transacao(%{id: transacao.id})
 
-      assert {:error, "Transação já foi estornada!"} = Create.estornar_transacao(%{transacao_id: transacao.id})
+      assert {:error, "Transação já foi estornada!"} =
+               Create.estornar_transacao(%{id: transacao.id})
     end
 
     test "quando tentar estar transacao que não existe, deve retornar erro" do
-
-      assert {:error, "Transação não encontrada!"} = Create.estornar_transacao(%{transacao_id: UUID.generate()})
+      assert {:error, "Transação não encontrada!"} =
+               Create.estornar_transacao(%{id: UUID.generate()})
     end
   end
 end

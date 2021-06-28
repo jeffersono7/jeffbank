@@ -24,6 +24,8 @@ defmodule JeffBankWeb do
       import Plug.Conn
       import JeffBankWeb.Gettext
       alias JeffBankWeb.Router.Helpers, as: Routes
+
+      defdelegate map_normalize_keys(map), to: unquote(__MODULE__)
     end
   end
 
@@ -56,6 +58,15 @@ defmodule JeffBankWeb do
       use Phoenix.Channel
       import JeffBankWeb.Gettext
     end
+  end
+
+  # custom
+  @spec map_normalize_keys(map()) :: map()
+  def map_normalize_keys(map) do
+    Enum.reduce(map, %{}, fn
+      {key, value}, acc when is_atom(key) -> Map.put(acc, key, value)
+      {key, value}, acc -> Map.put(acc, String.to_atom(key), value)
+    end)
   end
 
   defp view_helpers do
