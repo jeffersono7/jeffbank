@@ -9,6 +9,7 @@ defmodule JeffBankWeb.Router do
     pipe_through :api
 
     post "/contas", ContasController, :create
+    get "/contas/:id/saldo", ContasController, :get_saldo
 
     get "/transacoes", TransacoesController, :pesquisar
     post "/transacoes", TransacoesController, :create

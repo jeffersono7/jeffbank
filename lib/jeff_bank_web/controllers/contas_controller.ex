@@ -13,4 +13,12 @@ defmodule JeffBankWeb.ContasController do
       |> render("create.json", conta: conta)
     end
   end
+
+  def get_saldo(%Conn{} = conn, %{"id" => id}) do
+    with {:ok, %Conta{} = conta} <- JeffBank.obter_conta(id) do
+      conn
+      |> put_status(:ok)
+      |> render("saldo.json", saldo: conta.saldo)
+    end
+  end
 end

@@ -24,4 +24,8 @@ defmodule JeffBankWeb.ContasView do
       updated_at: updated_at
     }
   end
+
+  def render("saldo.json", %{saldo: saldo}) do
+    %{saldo: saldo}
+  end
 end
