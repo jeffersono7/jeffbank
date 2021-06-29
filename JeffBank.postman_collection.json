@@ -147,10 +147,10 @@
 						}
 					]
 				},
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:4000/api/contas/ea62cdd7-4f7c-4cc7-b027-46fe2dd94814/saldo",
+					"raw": "http://localhost:4000/api/transacoes/d2085435-f3be-4b23-93a3-8714f21cdc30/estorno",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -158,9 +158,9 @@
 					"port": "4000",
 					"path": [
 						"api",
-						"contas",
-						"ea62cdd7-4f7c-4cc7-b027-46fe2dd94814",
-						"saldo"
+						"transacoes",
+						"d2085435-f3be-4b23-93a3-8714f21cdc30",
+						"estorno"
 					]
 				}
 			},
