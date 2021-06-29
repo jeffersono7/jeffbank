@@ -22,5 +22,11 @@ defmodule JeffBankWeb.ContasController do
     end
   end
 
-  # def login(conn, )
+  def login(conn, %{"cpf" => cpf, "password" => password}) do
+    with {:ok, token, _decoded} <- JeffBank.login(cpf, password) do
+      conn
+      |> put_status(:ok)
+      |> render("jwt.json", jwt: token)
+    end
+  end
 end

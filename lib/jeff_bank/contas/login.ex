@@ -16,7 +16,7 @@ defmodule JeffBank.Contas.Login do
 
   def gerar_token(conta, password) do
     if checkpw(password, conta.password_hash) do
-      {:ok, Guardian.encode_and_sign(conta)}
+      Guardian.encode_and_sign(conta)
     else
       {:error, "Conta ou senha inválida"}
     end

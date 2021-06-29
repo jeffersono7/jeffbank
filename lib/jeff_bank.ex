@@ -11,6 +11,7 @@ defmodule JeffBank do
 
   defdelegate criar_conta(params), to: Contas.Create, as: :call
   defdelegate obter_conta(id), to: Contas.Get, as: :call
+  defdelegate login(cpf, password), to: Contas.Login, as: :call
 
   defdelegate criar_transacao(params, tipo), to: Transacoes.Create, as: :call
   defdelegate estornar_transacao(params), to: Transacoes.Create

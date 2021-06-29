@@ -8,7 +8,7 @@ defmodule JeffBank.Contas.LoginTest do
     test "quando parâmetros válidos, deve retornar token jwt" do
       conta = criar_conta()
 
-      assert {:ok, _jwt} = Login.call(conta.cpf, "123456")
+      assert {:ok, _token, _decoded} = Login.call(conta.cpf, "123456")
     end
   end
 end

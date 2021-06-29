@@ -12,7 +12,14 @@ defmodule JeffBankWeb.ContasControllerTest do
 
     test "quando parâmetros válidos, deve criar uma conta", %{conn: conn} do
       saldo = Decimal.new("10.0")
-      params = %{nome: "Jefferson", sobrenome: "Phoenix", cpf: @cpf, saldo: saldo, password: "123123"}
+
+      params = %{
+        nome: "Jefferson",
+        sobrenome: "Phoenix",
+        cpf: @cpf,
+        saldo: saldo,
+        password: "123123"
+      }
 
       response =
         conn
@@ -59,6 +66,36 @@ defmodule JeffBankWeb.ContasControllerTest do
         |> json_response(:bad_request)
 
       assert %{"message" => "Conta não encontrada!"} = response
+    end
+  end
+
+  describe "login/2" do
+    setup %{conn: conn} do
+      {:ok, conn: conn}
+    end
+
+    test "quando parametros válidos, deve retornar token jwt", %{conn: conn} do
+      conta = criar_conta()
+
+      params = %{cpf: conta.cpf, password: "123456"}
+
+      response =
+        conn
+        |> post(Routes.contas_path(conn, :login), params)
+        |> json_response(:ok)
+
+      assert %{"jwt" => _token} = response
+    end
+
+    test "quando parametros inválidos, deve retornar error", %{conn: conn} do
+      params = %{cpf: "11111111111", password: "123123"}
+
+      response =
+        conn
+        |> post(Routes.contas_path(conn, :login), params)
+        |> json_response(:bad_request)
+
+      assert %{"message" => _} = response
     end
   end
 end
