@@ -10,7 +10,7 @@ defmodule JeffBank.ContaTest do
     test "quando parâmetros válidos, deve retornar um changeset válido" do
       saldo = Decimal.new("0.0")
 
-      param = %{nome: "Jefferson", sobrenome: "Farias", cpf: @cpf, saldo: saldo}
+      param = %{nome: "Jefferson", sobrenome: "Farias", cpf: @cpf, saldo: saldo, password: "123456"}
 
       assert %Changeset{
                changes: %{cpf: @cpf, nome: "Jefferson", sobrenome: "Farias", saldo: ^saldo, password: "123456"},
@@ -21,7 +21,7 @@ defmodule JeffBank.ContaTest do
     test "quando cpf é inválido, deve retornar um changeset inválido" do
       saldo = Decimal.new("0.0")
 
-      param = %{nome: "Jefferson", sobrenome: "Farias", cpf: "22222222299", saldo: saldo}
+      param = %{nome: "Jefferson", sobrenome: "Farias", cpf: "22222222299", saldo: saldo, password: "123456"}
 
       assert %Changeset{
                changes: %{
