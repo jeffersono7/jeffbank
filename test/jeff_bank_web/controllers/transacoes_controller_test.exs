@@ -6,6 +6,8 @@ defmodule JeffBankWeb.TransacoesControllerTest do
 
   describe "create/2" do
     setup %{conn: conn} do
+      conn = put_token_conn(conn)
+
       {:ok, conn: conn}
     end
 
@@ -48,6 +50,8 @@ defmodule JeffBankWeb.TransacoesControllerTest do
 
   describe "estornar/2" do
     setup %{conn: conn} do
+      conn = put_token_conn(conn)
+
       {:ok, conn: conn}
     end
 
@@ -90,7 +94,13 @@ defmodule JeffBankWeb.TransacoesControllerTest do
   end
 
   describe "pesquisar/2" do
-    test "", %{conn: conn} do
+    setup %{conn: conn} do
+      conn = put_token_conn(conn)
+
+      {:ok, conn: conn}
+    end
+
+    test "deve retornar resultado da pesquisa por intervalor", %{conn: conn} do
       valor = Decimal.new("40.0")
       enviante = criar_conta()
       recebedora = criar_conta()

@@ -3,7 +3,8 @@ defmodule JeffBank.TestUtils do
   Módulo utilitário para testes
   """
 
-  alias JeffBank.Contas.Create
+  alias JeffBank.Contas.{Create, Login}
+  import Plug.Conn
 
   @cpf "90518762033"
 
@@ -12,6 +13,8 @@ defmodule JeffBank.TestUtils do
       @cpf unquote(@cpf)
 
       defdelegate criar_conta, to: unquote(__MODULE__)
+      defdelegate get_token, to: unquote(__MODULE__)
+      defdelegate put_token_conn(conn), to: unquote(__MODULE__)
     end
   end
 
@@ -23,5 +26,21 @@ defmodule JeffBank.TestUtils do
     {:ok, conta} = Create.call(params)
 
     conta
+  end
+
+  def get_token do
+    conta = criar_conta()
+
+    {:ok, token, _decoded} = Login.call(conta.cpf, conta.password)
+
+    token
+  end
+
+  def put_token_conn(conn) do
+    token = get_token()
+
+    conn = conn |> put_req_header("authorization", "Bearer #{token}")
+
+    conn
   end
 end

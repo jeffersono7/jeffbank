@@ -44,6 +44,8 @@ defmodule JeffBankWeb.ContasControllerTest do
 
   describe "get_saldo/2" do
     setup %{conn: conn} do
+      conn = put_token_conn(conn)
+
       {:ok, conn: conn}
     end
 

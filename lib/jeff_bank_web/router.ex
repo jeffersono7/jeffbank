@@ -5,11 +5,20 @@ defmodule JeffBankWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :jwt_authenticated do
+    plug JeffBankWeb.Guardian.AuthPipeline
+  end
+
   scope "/api", JeffBankWeb do
     pipe_through :api
 
     post "/contas", ContasController, :create
     post "/contas/sign_in", ContasController, :login
+  end
+
+  scope "/api", JeffBankWeb do
+    pipe_through [:api, :jwt_authenticated]
+
     get "/contas/:id/saldo", ContasController, :get_saldo
 
     get "/transacoes", TransacoesController, :pesquisar
