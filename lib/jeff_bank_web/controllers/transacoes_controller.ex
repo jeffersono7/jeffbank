@@ -2,10 +2,14 @@ defmodule JeffBankWeb.TransacoesController do
   use JeffBankWeb, :controller
 
   alias Plug.Conn
+  alias JeffBank.Guardian
 
   action_fallback JeffBankWeb.FallbackController
 
   def create(%Conn{} = conn, params) do
+    conta = Guardian.Plug.current_resource(conn)
+    params = Map.put(params, "enviante_id", conta.id)
+
     with params_normalized <- map_normalize_keys(params),
          {:ok, transacao} <- JeffBank.criar_transacao(params_normalized, :transacao) do
       conn

@@ -3,6 +3,7 @@ defmodule JeffBankWeb.ContasController do
 
   alias Plug.Conn
   alias JeffBank.Conta
+  alias JeffBank.Guardian
 
   action_fallback JeffBankWeb.FallbackController
 
@@ -14,7 +15,10 @@ defmodule JeffBankWeb.ContasController do
     end
   end
 
-  def get_saldo(%Conn{} = conn, %{"id" => id}) do
+  def get_saldo(%Conn{} = conn, %{"id" => _id}) do
+    current_conta = Guardian.Plug.current_resource(conn)
+    id = current_conta.id
+
     with {:ok, %Conta{} = conta} <- JeffBank.obter_conta(id) do
       conn
       |> put_status(:ok)
