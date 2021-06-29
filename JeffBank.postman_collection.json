@@ -1,0 +1,240 @@
+{
+	"info": {
+		"_postman_id": "ccf6f6f5-83b7-4880-a7f7-e4585429c65f",
+		"name": "JeffBank",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Criar conta",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cpf\": \"90518762033\",\n    \"nome\": \"Testador\",\n    \"sobrenome\": \"Elixir\",\n    \"password\": \"123456\",\n    \"saldo\": 100.0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/contas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"contas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar conta 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cpf\": \"72116543096\",\n    \"nome\": \"Desenvolvedor\",\n    \"sobrenome\": \"Phoenix\",\n    \"password\": \"123456\",\n    \"saldo\": 200.0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/contas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"contas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obter saldo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJKZWZmQmFuayIsImV4cCI6MTYyNzM4MjgzNSwiaWF0IjoxNjI0OTYzNjM1LCJpc3MiOiJKZWZmQmFuayIsImp0aSI6IjYyMmQxZWM0LTFhOGYtNGFhMC1iYmI5LTVmZDgyNTE0MmI0NiIsIm5iZiI6MTYyNDk2MzYzNCwic3ViIjoiZWE2MmNkZDctNGY3Yy00Y2M3LWIwMjctNDZmZTJkZDk0ODE0IiwidHlwIjoiYWNjZXNzIn0.Q8eVkfyBK48-Dv9pYYMiRQvOeMjwUpw0sm9COfLlAKMKRbp9AfrwK8vBcH4AJDZytJGdYHL70HhRtYhXYfgKvg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/contas/ea62cdd7-4f7c-4cc7-b027-46fe2dd94814/saldo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"contas",
+						"ea62cdd7-4f7c-4cc7-b027-46fe2dd94814",
+						"saldo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar transacao",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJKZWZmQmFuayIsImV4cCI6MTYyNzM4MjgzNSwiaWF0IjoxNjI0OTYzNjM1LCJpc3MiOiJKZWZmQmFuayIsImp0aSI6IjYyMmQxZWM0LTFhOGYtNGFhMC1iYmI5LTVmZDgyNTE0MmI0NiIsIm5iZiI6MTYyNDk2MzYzNCwic3ViIjoiZWE2MmNkZDctNGY3Yy00Y2M3LWIwMjctNDZmZTJkZDk0ODE0IiwidHlwIjoiYWNjZXNzIn0.Q8eVkfyBK48-Dv9pYYMiRQvOeMjwUpw0sm9COfLlAKMKRbp9AfrwK8vBcH4AJDZytJGdYHL70HhRtYhXYfgKvg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"recebedora_id\": \"dee7b5cf-d775-4319-a3ea-74924fe8fd3a\",\n    \"valor\": 50\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/transacoes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"transacoes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Estornar transacao",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJKZWZmQmFuayIsImV4cCI6MTYyNzM4MjgzNSwiaWF0IjoxNjI0OTYzNjM1LCJpc3MiOiJKZWZmQmFuayIsImp0aSI6IjYyMmQxZWM0LTFhOGYtNGFhMC1iYmI5LTVmZDgyNTE0MmI0NiIsIm5iZiI6MTYyNDk2MzYzNCwic3ViIjoiZWE2MmNkZDctNGY3Yy00Y2M3LWIwMjctNDZmZTJkZDk0ODE0IiwidHlwIjoiYWNjZXNzIn0.Q8eVkfyBK48-Dv9pYYMiRQvOeMjwUpw0sm9COfLlAKMKRbp9AfrwK8vBcH4AJDZytJGdYHL70HhRtYhXYfgKvg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/contas/ea62cdd7-4f7c-4cc7-b027-46fe2dd94814/saldo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"contas",
+						"ea62cdd7-4f7c-4cc7-b027-46fe2dd94814",
+						"saldo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pesquisar transacoes",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJKZWZmQmFuayIsImV4cCI6MTYyNzM4MjgzNSwiaWF0IjoxNjI0OTYzNjM1LCJpc3MiOiJKZWZmQmFuayIsImp0aSI6IjYyMmQxZWM0LTFhOGYtNGFhMC1iYmI5LTVmZDgyNTE0MmI0NiIsIm5iZiI6MTYyNDk2MzYzNCwic3ViIjoiZWE2MmNkZDctNGY3Yy00Y2M3LWIwMjctNDZmZTJkZDk0ODE0IiwidHlwIjoiYWNjZXNzIn0.Q8eVkfyBK48-Dv9pYYMiRQvOeMjwUpw0sm9COfLlAKMKRbp9AfrwK8vBcH4AJDZytJGdYHL70HhRtYhXYfgKvg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/api/transacoes?data_inicio=2021-06-29T07:50:00&data_final=2021-06-29T10:55:00",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"transacoes"
+					],
+					"query": [
+						{
+							"key": "data_inicio",
+							"value": "2021-06-29T07:50:00"
+						},
+						{
+							"key": "data_final",
+							"value": "2021-06-29T10:55:00"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cpf\": \"90518762033\",\n    \"password\": \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/contas/sign_in",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"contas",
+						"sign_in"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
