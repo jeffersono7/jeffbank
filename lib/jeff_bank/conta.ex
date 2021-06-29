@@ -4,8 +4,12 @@ defmodule JeffBank.Conta do
   """
 
   use Ecto.Schema
-  import Ecto.Changeset
+
+  alias Ecto.Changeset
+
+  import Changeset
   import Brcpfcnpj.Changeset
+  import Comeonin.Bcrypt, only: [hashpwsalt: 1]
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -14,6 +18,8 @@ defmodule JeffBank.Conta do
     field :nome, :string
     field :saldo, :decimal
     field :sobrenome, :string
+    field :password_hash, :string
+    field :password, :string, virtual: true
 
     timestamps()
   end
@@ -21,10 +27,12 @@ defmodule JeffBank.Conta do
   @doc false
   def changeset(attrs) do
     %__MODULE__{}
-    |> cast(attrs, [:nome, :sobrenome, :cpf, :saldo])
-    |> validate_required([:nome, :sobrenome, :cpf, :saldo])
+    |> cast(attrs, [:nome, :sobrenome, :cpf, :saldo, :password])
+    |> validate_required([:nome, :sobrenome, :cpf, :saldo, :password])
     |> validate_cpf(:cpf)
+    |> validate_length(:password, min: 6)
     |> unique_constraint(:cpf)
+    |> put_password_hash()
   end
 
   @spec deposito(%__MODULE__{}, Decimal.t()) :: Ecto.Changeset.t()
@@ -50,6 +58,16 @@ defmodule JeffBank.Conta do
         conta
         |> cast(novo_saldo, [:saldo])
         |> validate_required([:saldo])
+    end
+  end
+
+  defp put_password_hash(changeset) do
+    case changeset do
+      %Changeset{valid?: true, changes: %{password: pass}} ->
+        put_change(changeset, :password_hash, hashpwsalt(pass))
+
+      _ ->
+        changeset
     end
   end
 end

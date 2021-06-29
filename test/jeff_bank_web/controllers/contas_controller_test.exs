@@ -12,7 +12,7 @@ defmodule JeffBankWeb.ContasControllerTest do
 
     test "quando parâmetros válidos, deve criar uma conta", %{conn: conn} do
       saldo = Decimal.new("10.0")
-      params = %{nome: "Jefferson", sobrenome: "Phoenix", cpf: @cpf, saldo: saldo}
+      params = %{nome: "Jefferson", sobrenome: "Phoenix", cpf: @cpf, saldo: saldo, password: "123123"}
 
       response =
         conn

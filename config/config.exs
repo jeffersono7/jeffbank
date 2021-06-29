@@ -15,6 +15,10 @@ config :jeff_bank, :generators,
   migration: true,
   binary_id: true
 
+config :jeff_bank, JeffBank.Guardian,
+  issuer: "JeffBank",
+  secret_key: "c1WBhAHuKOIvwGPyq60B8QtEZyfMVG380oUguLuIs1cPwivnNhuWAvTSChEa++he"
+
 # Configures the endpoint
 config :jeff_bank, JeffBankWeb.Endpoint,
   url: [host: "localhost"],

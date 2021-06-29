@@ -28,4 +28,8 @@ defmodule JeffBankWeb.ContasView do
   def render("saldo.json", %{saldo: saldo}) do
     %{saldo: saldo}
   end
+
+  def render("jwt.json", %{jwt: jwt}) do
+    %{jwt: jwt}
+  end
 end

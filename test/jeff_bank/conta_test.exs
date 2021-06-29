@@ -13,7 +13,7 @@ defmodule JeffBank.ContaTest do
       param = %{nome: "Jefferson", sobrenome: "Farias", cpf: @cpf, saldo: saldo}
 
       assert %Changeset{
-               changes: %{cpf: @cpf, nome: "Jefferson", sobrenome: "Farias", saldo: ^saldo},
+               changes: %{cpf: @cpf, nome: "Jefferson", sobrenome: "Farias", saldo: ^saldo, password: "123456"},
                valid?: true
              } = Conta.changeset(param)
     end
@@ -28,7 +28,8 @@ defmodule JeffBank.ContaTest do
                  cpf: "22222222299",
                  nome: "Jefferson",
                  sobrenome: "Farias",
-                 saldo: ^saldo
+                 saldo: ^saldo,
+                 password: "123456"
                },
                errors: [{:cpf, {_, [validation: :cpf]}}],
                valid?: false
@@ -43,7 +44,8 @@ defmodule JeffBank.ContaTest do
                errors: [
                  sobrenome: {"can't be blank", [validation: :required]},
                  cpf: {"can't be blank", [validation: :required]},
-                 saldo: {"can't be blank", [validation: :required]}
+                 saldo: {"can't be blank", [validation: :required]},
+                 password: {_, [validation: :required]}
                ],
                valid?: false
              } = Conta.changeset(param)
@@ -53,7 +55,7 @@ defmodule JeffBank.ContaTest do
   describe "deposito/2" do
     test "quando recebido uma conta e valor de deposito, deve retornar um changeset válido com novo saldo" do
       saldo = Decimal.new("0.0")
-      conta = %Conta{nome: "Jefferson", sobrenome: "Farias", cpf: @cpf, saldo: saldo}
+      conta = %Conta{nome: "Jefferson", sobrenome: "Farias", cpf: @cpf, saldo: saldo, password: "123456"}
 
       valor_deposito = Decimal.new("30.0")
 
@@ -69,7 +71,7 @@ defmodule JeffBank.ContaTest do
   describe "saque/2" do
     test "quando recebido uma conta com saldo suficiente e valor de saque dentro do limite, deve retornar um changeset válido com novo saldo" do
       saldo = Decimal.new("100.25")
-      conta = %Conta{nome: "Jefferson", sobrenome: "Farias", cpf: @cpf, saldo: saldo}
+      conta = %Conta{nome: "Jefferson", sobrenome: "Farias", cpf: @cpf, saldo: saldo, password: "123123"}
 
       valor_saque = Decimal.new("30.23")
 
@@ -83,7 +85,7 @@ defmodule JeffBank.ContaTest do
 
     test "quando recebido uma conta e valor de saque maior que o saldo existente, deve retornar um changeset inválido sem alterações" do
       saldo = Decimal.new("100.25")
-      conta = %Conta{nome: "Jefferson", sobrenome: "Farias", cpf: @cpf, saldo: saldo}
+      conta = %Conta{nome: "Jefferson", sobrenome: "Farias", cpf: @cpf, saldo: saldo, password: "123123"}
 
       valor_saque = Decimal.new("100.26")
 

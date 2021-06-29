@@ -8,6 +8,7 @@ defmodule JeffBank.Repo.Migrations.CreateContas do
       add :sobrenome, :string, not_null: true, size: 50
       add :cpf, :string, not_null: true, size: 11
       add :saldo, :decimal, not_null: true
+      add :password_hash, :string, not_null: true, size: 1000
 
       timestamps()
     end

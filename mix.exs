@@ -43,7 +43,10 @@ defmodule JeffBank.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:brcpfcnpj, "~> 0.2.4"}
+      {:brcpfcnpj, "~> 0.2.4"},
+      {:guardian, "~> 2.1"},
+      {:comeonin, "~> 4.0"},
+      {:bcrypt_elixir, "~> 1.0"}
     ]
   end
 

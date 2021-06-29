@@ -9,7 +9,7 @@ defmodule JeffBank.Contas.CreateTest do
   describe "call/2" do
     test "quando parametros válidos, deve criar uma conta" do
       saldo = Decimal.new("10.0")
-      params = %{nome: "Jefferson", sobrenome: "Farias", cpf: @cpf, saldo: saldo}
+      params = %{nome: "Jefferson", sobrenome: "Farias", cpf: @cpf, saldo: saldo, password: "123123"}
 
       assert {:ok, %Conta{}} = Create.call(params)
     end

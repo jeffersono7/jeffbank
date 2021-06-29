@@ -18,7 +18,7 @@ defmodule JeffBank.TestUtils do
   def criar_conta do
     cpf = Brcpfcnpj.cpf_generate()
 
-    params = %{nome: "Jefferson", sobrenome: "Elixir", cpf: cpf, saldo: Decimal.new("100")}
+    params = %{nome: "Jefferson", sobrenome: "Elixir", cpf: cpf, saldo: Decimal.new("100"), password: "123456"}
 
     {:ok, conta} = Create.call(params)
 
